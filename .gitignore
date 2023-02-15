@@ -1,7 +1,9 @@
 # folder
+.lightly
 .idea
 .vscode
 .obsidian
+
 # file
 *.html
 *.txt.lightly
