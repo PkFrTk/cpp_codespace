@@ -3,6 +3,7 @@
 .idea
 .vscode
 .obsidian
+.vs
 
 # file
 *.html
