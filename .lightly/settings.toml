@@ -1,6 +1,10 @@
-
-title = "lightly settings"
-
 ports = []
+[languages.cpp]
+language = "cpp"
+[languages.cpp.run."test.cpp"]
+name = "test.cpp"
+path = "/workspace/cpp_codespace/test.cpp"
 
-[languages]
+[languages.cpp.run."test01.cpp"]
+name = "test01.cpp"
+path = "/workspace/cpp_codespace/test01.cpp"
