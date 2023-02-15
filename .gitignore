@@ -16,3 +16,7 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# single file
+test.exe
+test01.exe
