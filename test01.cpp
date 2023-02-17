@@ -1,60 +1,44 @@
 #include <iostream>
 using namespace std;
-class Building;
-class goodGay
-{
+class Person {
+	friend ostream& operator<<(ostream& out, Person& p);
+
 public:
 
-	goodGay();
-	void visit();
+	Person(int a, int b)
+	{
+		this->m_A = a;
+		this->m_B = b;
+	}
+
+	//成员函数 实现不了  p << cout 不是我们想要的效果
+	//void operator<<(Person& p){
+	//}
 
 private:
-	Building *building;
+	int m_A;
+	int m_B;
 };
 
-
-class Building
-{
-	//告诉编译器 goodGay类是Building类的好朋友，可以访问到Building类中私有内容
-	// friend class goodGay;
-    friend void goodGay::visit();
-public:
-	Building();
-
-public:
-	string m_SittingRoom; //客厅
-private:
-	string m_BedRoom;//卧室
-};
-
-Building::Building()
-{
-	this->m_SittingRoom = "客厅";
-	this->m_BedRoom = "卧室";
+//全局函数实现左移重载
+//ostream对象只能有一个
+ostream& operator<<(ostream& out, Person& p) {
+	out << "a:" << p.m_A << " b:" << p.m_B;
+	return out;
 }
 
-goodGay::goodGay()
-{
-	building = new Building;
+void test() {
+
+	Person p1(10, 20);
+
+	cout << p1 << "hello world" << endl; //链式编程
 }
 
-void goodGay::visit()
-{
-	cout << "好基友正在访问" << building->m_SittingRoom << endl;
-	cout << "好基友正在访问" << building->m_BedRoom << endl;
-}
+int main() {
 
-void test01()
-{
-	goodGay gg;
-	gg.visit();
-
-}
-
-int main(){
-
-	test01();
+	test();
 
 	system("pause");
+
 	return 0;
 }
