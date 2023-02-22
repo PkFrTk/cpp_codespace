@@ -1,68 +1,58 @@
 #include <iostream>
 using namespace std;
 
-class Building;
-class goodGay
-{
+class Person {
 public:
-
-	goodGay();
-	void visit(); //只让visit函数作为Building的好朋友，可以发访问Building中私有内容
-	void visit2();
-
-private:
-	Building* building;
+	Person operator+(Person& p) {
+		Person temp;
+		temp.ma = this->ma + p.ma;
+		temp.mb = this->mb + p.mb;
+		return temp;
+	}
+	int ma;
+	int mb;
 };
+//Person operator+(Person& p1,Person &p2) {
+//	Person temp;
+//	temp.ma = p1.ma + p2.ma;
+//	temp.mb = p1.mb + p2.mb;
+//	return temp;
+//}
 
-
-class Building
-{
-	//告诉编译器  goodGay类中的visit成员函数 是Building好朋友，可以访问私有内容
-	// friend void goodGay::visit();
-	// friend void goodGay::visit2();
-	friend class goodGay;
-public:
-	Building();
-
-public:
-	string m_SittingRoom; //客厅
-private:
-	string m_BedRoom;//卧室
-};
-
-Building::Building()
-{
-	this->m_SittingRoom = "客厅";
-	this->m_BedRoom = "卧室";
+Person operator+(Person& p1, int num) {
+	Person temp;
+	temp.ma = p1.ma + num;
+	temp.mb = p1.mb + num;
+	return temp;
 }
 
-goodGay::goodGay()
-{
-	building = new Building;
-}
+void test() {
 
-void goodGay::visit()
-{
-	cout << "好基友1正在访问" << building->m_SittingRoom << endl;
-	cout << "好基友1正在访问" << building->m_BedRoom << endl;
-}
+	Person p1;
+	p1.ma = 10;
+	p1.mb = 10;
 
-void goodGay::visit2()
-{
-	cout << "好基友2正在访问" << building->m_SittingRoom << endl;
-	cout << "好基友2正在访问" << building->m_BedRoom << endl;
-}
+	Person p2;
+	p2.ma = 20;
+	p2.mb = 20;
 
-void test01()
-{
-	goodGay gg;
-	gg.visit();
-	gg.visit2();
+	Person p3 = p1 + p2; //simplied without global function
+	//Person p3 = p1.operator+(p2); //menber function
+	//Person p3 = operator+(p1, p2); //global function
+	Person p4 = p1 + 10;
+
+	cout << "p1.ma:" << p1.ma;
+	cout << " p1.mb:" << p1.mb << endl;
+	cout << "p2.ma:" << p2.ma;
+	cout << " p2.mb:" << p2.mb << endl;
+	cout << "p3.ma:" << p3.ma;
+	cout << " p3.mb:" << p3.mb << endl;
+	cout << "p4.ma:" << p4.ma;
+	cout << " p4.mb:" << p4.mb << endl;
 }
 
 int main() {
-
-	test01();
-
+	test();
+	system("pause");
 	return 0;
 }
