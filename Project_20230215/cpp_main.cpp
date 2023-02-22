@@ -3,52 +3,29 @@ using namespace std;
 
 class Person {
 public:
-	Person operator+(Person& p) {
-		Person temp;
-		temp.ma = this->ma + p.ma;
-		temp.mb = this->mb + p.mb;
-		return temp;
+	friend void test();
+	friend ostream& operator<<(ostream& cout, Person& p);
+	Person(int a, int b) {
+		ma = a;
+		mb = b;
 	}
+private:
 	int ma;
 	int mb;
 };
-//Person operator+(Person& p1,Person &p2) {
-//	Person temp;
-//	temp.ma = p1.ma + p2.ma;
-//	temp.mb = p1.mb + p2.mb;
-//	return temp;
-//}
 
-Person operator+(Person& p1, int num) {
-	Person temp;
-	temp.ma = p1.ma + num;
-	temp.mb = p1.mb + num;
-	return temp;
+ostream& operator<<(ostream& cout, Person& p) {
+	cout << "p.ma:" << p.ma << " p.mb:" << p.mb << endl;
+	return cout; //cout 输出流对象 ostream
 }
 
 void test() {
-
-	Person p1;
-	p1.ma = 10;
-	p1.mb = 10;
-
-	Person p2;
-	p2.ma = 20;
-	p2.mb = 20;
-
-	Person p3 = p1 + p2; //simplied without global function
-	//Person p3 = p1.operator+(p2); //menber function
-	//Person p3 = operator+(p1, p2); //global function
-	Person p4 = p1 + 10;
-
-	cout << "p1.ma:" << p1.ma;
-	cout << " p1.mb:" << p1.mb << endl;
-	cout << "p2.ma:" << p2.ma;
-	cout << " p2.mb:" << p2.mb << endl;
-	cout << "p3.ma:" << p3.ma;
-	cout << " p3.mb:" << p3.mb << endl;
-	cout << "p4.ma:" << p4.ma;
-	cout << " p4.mb:" << p4.mb << endl;
+	//Person p; //1、在类中声明友元friend
+	//p.ma = 10;
+	//p.mb = 10;
+	Person p(10, 10); //在类中public初始化
+	//cout << p.ma << endl;
+	cout << p << endl;
 }
 
 int main() {
